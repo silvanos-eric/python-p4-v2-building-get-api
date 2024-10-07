@@ -36,5 +36,19 @@ def games():
     return games
 
 
+@app.route('/games/<int:id>')
+def game_by_id(id):
+    game = Game.query.get(id)
+
+    game_dict = {
+        'title': game.title,
+        'genre': game.genre,
+        'platform': game.platform,
+        'price': game.price
+    }
+
+    return game_dict
+
+
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
