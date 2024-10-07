@@ -26,6 +26,12 @@ def games():
     return [game.to_dict() for game in Game.query.all()]
 
 
+@app.route('/games/users/<int:id>')
+def game_users_by_id(id):
+    users = Game.query.get(id).users
+    return [user.to_dict(rules=('-reviews', )) for user in users]
+
+
 @app.route('/games/<int:id>')
 def game_by_id(id):
     game = Game.query.get(id)

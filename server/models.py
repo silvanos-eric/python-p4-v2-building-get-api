@@ -26,6 +26,8 @@ class Game(db.Model, SerializerMixin):
 
     reviews = db.relationship("Review", back_populates="game")
 
+    users = association_proxy('reviews', 'user')
+
     serialize_rules = '-reviews.game',
 
     def __repr__(self):
