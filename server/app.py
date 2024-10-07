@@ -23,31 +23,13 @@ def index():
 
 @app.route('/games')
 def games():
-    games = []
-    for game in Game.query.order_by(Game.title).all():
-        game_dict = {
-            'title': game.title,
-            'genre': game.genre,
-            'platform': game.platform,
-            'price': game.price
-        }
-        games.append(game_dict)
-
-    return games
+    return [game.to_dict() for game in Game.query.all()]
 
 
 @app.route('/games/<int:id>')
 def game_by_id(id):
     game = Game.query.get(id)
-
-    game_dict = {
-        'title': game.title,
-        'genre': game.genre,
-        'platform': game.platform,
-        'price': game.price
-    }
-
-    return game_dict
+    return game.to_dict()
 
 
 if __name__ == '__main__':
